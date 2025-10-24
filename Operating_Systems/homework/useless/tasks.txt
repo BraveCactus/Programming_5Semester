@@ -1,0 +1,3 @@
+2 ls
+3 touch test.txt
+4 rm test.txt
