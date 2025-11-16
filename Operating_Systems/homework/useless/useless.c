@@ -27,12 +27,10 @@ int main(int argc, char* argv[]) {
 
     while (fgets(line, sizeof(line), file) != NULL) {
         line_number++;
-
-        // Удаляем символ новой строки
+       
         line[strcspn(line, "\n")] = '\0';
         line[strcspn(line, "\r")] = '\0';
-
-        // Пропускаем пустые строки
+       
         if (strlen(line) == 0) {
             continue;
         }
@@ -64,8 +62,7 @@ int main(int argc, char* argv[]) {
             continue;
         }
 
-        if (pid == 0) {
-            // ДОЧЕРНИЙ ПРОЦЕСС
+        if (pid == 0) {            
             sleep(delay);
             printf("Command %s has been executed after %d seconds\n", command, delay);
             
@@ -86,8 +83,7 @@ int main(int argc, char* argv[]) {
 
             perror("Error: execvp failed");
             exit(1);
-        } else {
-            // РОДИТЕЛЬСКИЙ ПРОЦЕСС
+        } else {            
             printf("Start child process %d\n", pid);
         }   
     }
