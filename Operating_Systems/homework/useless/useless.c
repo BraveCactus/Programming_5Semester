@@ -20,36 +20,21 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-    char line[MAX_LINE_LENGTH];
+    int delay;
+    char command[MAX_LINE_LENGTH];
     int line_number = 0;
 
     printf("useless started\n");
-
-    while (fgets(line, sizeof(line), file) != NULL) {
+    
+    while (fscanf(file, "%d %[^\n]", &delay, command) == 2) {
         line_number++;
-       
-        line[strcspn(line, "\n")] = '\0';
-        line[strcspn(line, "\r")] = '\0';
-       
-        if (strlen(line) == 0) {
-            continue;
-        }
         
-        char* delay_str = strtok(line, " \t");
-        if (delay_str == NULL) {
-            printf("Error: Missing delay on line %d\n", line_number);
+        if (strlen(command) == 0) {
             continue;
         }
 
-        int delay = atoi(delay_str);
         if (delay < 0) {
             printf("Error: Negative delay on line %d\n", line_number);
-            continue;
-        }
-
-        char* command = strtok(NULL, "");
-        if (command == NULL) {
-            printf("Error: Missing command on line %d\n", line_number);
             continue;
         }
 
